@@ -1,0 +1,32 @@
+---
+users_groups: []
+# - name: "mullholland"  # required
+#   gid: "4711"  # optional
+#   state: ""  # optional
+#   system: ""  # optional [bool]
+
+users: []
+# - name: "mullholland"
+#   state: ""  # optional (defaults to present)
+#   uid: ""  # optional
+#   system: ""  # optional (bool)
+#   `group` and `groups` must exist.
+#   the user's primary group
+#   group: "mullholland"
+#   List of groups user will be added to.
+#   When set to an empty string '', the user is
+#   removed from all groups except the primary group.
+#   groups: "users"
+#   create_home: ""  # optional [bool] (defaults to true)
+#   home: ""  # optional
+#   shell: ""  # optional
+#   comment: ""  # optional
+#   Optionally set the user's password to this crypted value.
+#   To create a disabled account on Linux systems, set this to '!' or '*'.
+#   password: ""  # optional
+#   update_password: ""  # optional [always/on_create] (defaults to on_create)
+#   An expiry time for the user in epoch, it will be ignored on platforms that do not support this.
+#   expires: ""  # optional
+#   ssh_keys: "ssh-rsa yyyxxccvvbb"  # optional
+#   ssh_key_exclusive: ""  # optional [bool]
+#   ssh_key_manage_dir: ""  # optional [bool]

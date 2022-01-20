@@ -1,0 +1,30 @@
+---
+- name: manage users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+    uid: "{{ item.uid | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    groups: "{{ item.groups | default(omit) }}"
+    create_home: "{{ item.create_home | default('true') }}"
+    home: "{{ item.home | default(omit) }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    comment: "{{ item.comment | default(omit) }}"
+    password: "{{ item.password | default(omit) }}"
+    update_password: "{{ item.update_password | default(omit) }}"
+    expires: "{{ item.expires | default(omit) }}"
+  with_items:
+    - "{{ users }}"
+
+- name: manage ssh keys
+  ansible.posix.authorized_key:
+    user: "{{ item.name }}"
+    exclusive: "{{ item.ssh_key_exclusive | default('false') }}"
+    manage_dir: "{{ item.ssh_key_manage_dir | default('false') }}"
+    key: "{{ item.ssh_key }}"
+    state: present
+  when:
+    - item.ssh_key is defined
+  with_items:
+    - "{{ users }}"

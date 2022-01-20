@@ -1,0 +1,83 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: SmokeTests
+      debug:
+        msg:
+          - "ansible_version => {{ansible_version}}"
+          - "ansible_distribution => {{ ansible_distribution }}"
+          - "ansible_distribution_major_version => {{ ansible_distribution_major_version }}"
+          - "ansible_os_family  => {{ ansible_os_family}}"
+          - "ansible_system  => {{ ansible_system }}"
+
+    - name: verify if group exists (default)
+      ansible.builtin.group:
+        name: "mullholland"
+      check_mode: true
+      register: molecule_group
+      failed_when: (molecule_group is changed) or (molecule_group is failed)
+
+    - name: verify if group exists (full_opts)
+      ansible.builtin.group:
+        name: "full_opts"
+        gid: "4711"
+        state: "present"
+        system: "true"
+      check_mode: true
+      register: molecule_group
+      failed_when: (molecule_group is changed) or (molecule_group is failed)
+
+    - name: verify if group exists (absent)
+      ansible.builtin.group:
+        name: "group_absent"
+        state: "absent"
+      check_mode: true
+      register: molecule_group
+      failed_when: (molecule_group is changed) or (molecule_group is failed)
+
+    - name: verify if user exists (default)
+      ansible.builtin.user:
+        name: "mullholland"
+        state: "present"
+      check_mode: true
+      register: molecule_user
+      failed_when: (molecule_user is changed) or (molecule_user is failed)
+
+    - name: verify if user exists (full_user)
+      ansible.builtin.user:
+        name: "full_user"
+        state: "present"
+        uid: "4711"
+        system: "true"
+        group: "mullholland"
+        groups: "users"
+        create_home: "true"
+        home: "/home/full_user"
+        shell: "/bin/sh"
+        comment: "managed by ansible"
+        password: "!"
+      check_mode: true
+      register: molecule_user
+      failed_when: (molecule_user is changed) or (molecule_user is failed)
+
+    - name: verify if user not exists (absent)
+      ansible.builtin.user:
+        name: "user_absent"
+        state: "absent"
+      check_mode: true
+      register: molecule_user
+      failed_when: (molecule_user is changed) or (molecule_user is failed)
+
+    - name: verify if ssh_keys exists (full_user)
+      ansible.posix.authorized_key:
+        user: "full_user"
+        exclusive: "true"
+        manage_dir: "true"
+        key: |
+          ssh-rsa yyyxxccvvbb
+          ssh-rsa yyyxxccvvbbb
+        state: present
