@@ -39,7 +39,7 @@ users: []
 #   update_password: ""  # optional [always/on_create] (defaults to on_create)
 #   An expiry time for the user in epoch, it will be ignored on platforms that do not support this.
 #   expires: ""  # optional
-#   ssh_keys: "ssh-rsa yyyxxccvvbb"  # optional
+#   ssh_key: "ssh-rsa yyyxxccvvbb"  # optional
 #   ssh_key_exclusive: ""  # optional [bool]
 #   ssh_key_manage_dir: ""  # optional [bool]
 ```
