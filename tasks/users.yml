@@ -1,5 +1,5 @@
 ---
-- name: manage users
+- name: users | manage users
   ansible.builtin.user:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
@@ -17,7 +17,7 @@
   with_items:
     - "{{ users }}"
 
-- name: manage ssh keys
+- name: users | manage ssh keys
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
     exclusive: "{{ item.ssh_key_exclusive | default('false') }}"

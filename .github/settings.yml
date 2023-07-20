@@ -1,0 +1,8 @@
+---
+#
+# Ansible managed
+#
+repository:
+  description: Manages users and groups
+  homepage: https://mullholland.net
+  topics: system, ansible, molecule, tox, playbook

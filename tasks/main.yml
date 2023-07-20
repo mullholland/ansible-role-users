@@ -1,6 +1,6 @@
 ---
 - name: manage groups
-  include_tasks: groups.yml
+  ansible.builtin.include_tasks: groups.yml
 
 - name: manage users
-  include_tasks: users.yml
+  ansible.builtin.include_tasks: users.yml
