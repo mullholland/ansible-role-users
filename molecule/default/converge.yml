@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  become: true
   gather_facts: true
   vars:
     users_groups:
@@ -63,4 +62,4 @@
         state: "absent"
 
   roles:
-    - role: "ansible-role-users"
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}"

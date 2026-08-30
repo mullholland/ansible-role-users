@@ -1,5 +1,5 @@
 ---
-- name: groups | manage groups
+- name: groups | Manage groups
   ansible.builtin.group:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
